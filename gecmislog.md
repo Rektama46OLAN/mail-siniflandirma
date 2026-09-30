@@ -20,3 +20,13 @@ Yarım kalan işler buraya değil `gecmis.md`'ye yazılır.
 ---
 
 ## Log
+
+## [2026-09-30] Faz 0: planlama iskeleti ve GitHub — TAMAMLANDI
+- Ne yapıldı: proje-planlama iskeleti kuruldu, karar özeti notes.md/const.md'ye işlendi, public repo açıldı (Rektama46OLAN/mail-siniflandirma).
+- Yol boyunca çıkanlar: PowerShell 5.1'de `git commit -F -` here-string ile çalışmadı; mesaj `-m $msg` ile verildi. `gh repo create` push'u başarılı olsa da stderr çıktısını hata gibi gösteriyor.
+- Dokunulan dosyalar: CLAUDE.md, AGENT.md, notes.md, const.md, gecmis.md, gecmislog.md, .gitignore
+
+## [2026-09-30] Faz 1a: test maili üretimi — TAMAMLANDI
+- Ne yapıldı: 8 Sonnet subagent kategori başına yapay mail yazdı; toplam 275 mail (7×35 + Belirsiz 30), `data/uretim/*.jsonl`.
+- Yol boyunca çıkanlar: Hiçbir ajan çıktısını doğrulamamıştı. Şema kontrolünde `soru.jsonl` 26. satırda eksik tırnak (`kisilik":"kisa",kategori"`) bulundu ve elle düzeltildi; ajan "fazla alanı çıkardım" derken bozmuştu. Ajan raporlarına güvenmeden dosya ayrıştırılmalı.
+- Dokunulan dosyalar: data/uretim/*.jsonl
