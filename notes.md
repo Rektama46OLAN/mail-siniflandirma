@@ -51,7 +51,7 @@ Faz uzun görünüyorsa ikiye böl; ilerleme ölçülemeyen faz faz değildir.
 | **3** | TF-IDF + lojistik regresyon, aynı sette kıyas (çapraz doğrulama) | Kural vs ML vs birleşik tablosu `reports/`'ta; seçim gerekçesi const.md'de |
 | **4** | Masaüstü pencere + Excel rapor (kategori, güven, acil, yanlışları görme listesi) | Örnek klasör seçilip pencereden çalıştırılınca .xlsx üretiliyor |
 | **4b** | Windows paketleme (PyInstaller onedir), yol düzeltmeleri, kurulum yönergesi | Python'suz ortamda `.exe` mail klasörünü okuyup Excel üretiyor; pencere açılıyor |
-| **5** | Kanıt raporu (teklifte kullanılacak rakamlar) | Hedef doğruluk ölçüldü; rapor `reports/`'ta; ArdaOS'a rapor edildi |
+| **5** | Kanıt raporu, Excel düzeltme geri beslemesi, ArdaOS'a rapor | Hedef doğruluk ölçüldü; rapor `reports/`'ta; düzeltmeler pencereden yüklenip model yeniden eğitiliyor; ArdaOS'a rapor edildi (tamamlandı 2026-09-30) |
 
 **Faz 1b Arda'ya bağlı:** etiket doğrulamasının son sözü Arda'da. Arda uzaktayken 1a ve
 sonrası ilerleyebilir ama sonuçlar "onaysız etiket" ile üretilir; 1b onayı gelince yeniden ölçülür.

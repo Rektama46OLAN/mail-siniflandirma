@@ -32,7 +32,8 @@ class MLSiniflandirici:
         self.boru = _boru(C)
 
     def egit(self, veri: list[dict]):
-        self.boru.fit([_metin(d["konu"], d["govde"]) for d in veri], [d["kategori"] for d in veri])
+        self.boru.fit([_metin(d["konu"], d["govde"]) for d in veri], [d["kategori"] for d in veri],
+                      lr__sample_weight=[d.get("agirlik", 1.0) for d in veri])
         return self
 
     def olasiliklar(self, veri: list[dict]):

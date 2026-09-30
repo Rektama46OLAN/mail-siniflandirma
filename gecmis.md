@@ -18,7 +18,12 @@ Bir madde tamamlandığında buradan silinir ve özeti `gecmislog.md`'ye taşın
 
 ## Açık işler
 
-## [2026-09-30] Faz 5: kanıt raporu + Excel düzeltme geri beslemesi
-- Durum: Faz 4 ve 4b bitti; Arda pencereye baktı (düzeltme istemedi). Faz 5 başlamadı.
-- Sonraki adım: (0) Windows Sandbox veya temiz bir bilgisayarda `dist/MailSiniflandirma` klasörünü Arda'nın denemesi (Python'suz ortam yalnızca PATH temizlenerek simüle edildi). (1) Excel "Kontrol listesi"ndeki "Doğru kategori" sütununu geri okuyup düzeltmeleri eğitim verisine ekleyen ve modeli yeniden eğiten betik (henüz yok; sütun ve açılır liste hazır). (2) Teklifte kullanılacak kanıt raporu: son rakamlar (sentetik olduğu belirtilerek), örnek Excel, ekran görüntüsü. (3) ArdaOS'a rapor.
-- Bağlam: notes.md Faz 5, const.md çalışma noktası. Pencerenin görsel düzeni gerçek ekranda Arda tarafından gözden geçirilmedi (yalnızca otomatik testle açılıp çalıştığı doğrulandı).
+## [2026-09-30] Temiz Windows'ta `.exe` denemesi (Arda)
+- Durum: `dist/MailSiniflandirma` yalnızca PATH'ten Python çıkarılarak simüle edilmiş ortamda denendi; Python'suz gerçek makinede denenmedi.
+- Sonraki adım: Windows Sandbox veya temiz bir bilgisayarda klasörü açıp çalıştırmak; sonucu (SmartScreen uyarısı, ilk açılış süresi, hata) bildirmek. `python derle.py` ile paket yeniden üretilebilir.
+- Bağlam: teslimat/KURULUM.md, gecmislog "Faz 4b".
+
+## [2026-09-30] Teklif aşaması (henüz başlamadı, karar Arda'da)
+- Durum: Kanıt projesi bitti. Teklif metni, fiyatlandırma ve hedef müşteri listesi konuşulmadı; KVKK/veri işleme değerlendirmesi (opsiyonel LLM katmanı için) yapılmadı.
+- Sonraki adım: Arda konuyu açınca teklif planı (kanıt raporundaki "söylenebilir / söylenemez" bölümü çıkış noktası) ve ilk pilot müşteri kurgusu.
+- Bağlam: reports/2026-09-30-kanit-raporu.md, ArdaOS Inbox/Dump/2026-09-30-eposta-siniflandirma-proje-raporu.md.

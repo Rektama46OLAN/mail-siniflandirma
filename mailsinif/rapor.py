@@ -56,7 +56,9 @@ def yaz(sonuclar: list[dict], yol: str, okunamayan: list[str] | None = None):
     _baslik(ws, ["Dosya", "Gönderen", "Konu", "Kategori", "Güven", "Acil", "Kontrol", "Önizleme"],
             [24, 28, 38, 20, 8, 7, 9, 70])
     for s in sonuclar:
-        ws.append([s["kaynak"], s["gonderen"], s["konu"], s["kategori"], s["guven"], "ACİL" if s["acil"] else "",
+        # Belirsiz'de "güven" anlamsız (model Belirsiz sınıfından emin olabilir); müşteriyi şaşırtmamak için boş bırakılır
+        ws.append([s["kaynak"], s["gonderen"], s["konu"], s["kategori"], None if s["kategori"] == "Belirsiz" else s["guven"],
+                   "ACİL" if s["acil"] else "",
                    "kontrol et" if s["kontrol"] else "", " ".join(s["govde"].split())[:200]])
         satir = ws.max_row
         ws.cell(satir, 5).number_format = "0%"
@@ -66,13 +68,15 @@ def yaz(sonuclar: list[dict], yol: str, okunamayan: list[str] | None = None):
     ws.auto_filter.ref = ws.dimensions
 
     ws = wb.create_sheet("Kontrol listesi")
-    _baslik(ws, ["Dosya", "Konu", "Tahmin", "Güven", "Acil", "Doğru kategori (siz seçin)", "Önizleme"],
-            [24, 38, 20, 8, 7, 28, 70])
+    _baslik(ws, ["Dosya", "Konu", "Tahmin", "Güven", "Acil", "Doğru kategori (siz seçin)", "Önizleme", "Tam metin"],
+            [24, 38, 20, 8, 7, 28, 70, 10])
+    ws.column_dimensions["H"].hidden = True  # düzeltmeler geri yüklenirken tam metin gerekir (önizleme kesik)
     dv = DataValidation(type="list", formula1='"' + ",".join(k for k in KATEGORILER) + '"', allow_blank=True)
     ws.add_data_validation(dv)
     for s in sorted((s for s in sonuclar if s["kontrol"]), key=lambda s: s["guven"]):
-        ws.append([s["kaynak"], s["konu"], s["kategori"], s["guven"], "ACİL" if s["acil"] else "", None,
-                   " ".join(s["govde"].split())[:200]])
+        ws.append([s["kaynak"], s["konu"], s["kategori"], None if s["kategori"] == "Belirsiz" else s["guven"],
+                   "ACİL" if s["acil"] else "", None,
+                   " ".join(s["govde"].split())[:200], s["govde"][:30000]])
         satir = ws.max_row
         ws.cell(satir, 4).number_format = "0%"
         ws.cell(satir, 6).fill = _KONTROL

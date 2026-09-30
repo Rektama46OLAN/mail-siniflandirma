@@ -7,7 +7,7 @@ import threading
 import tkinter as tk
 from tkinter import filedialog, messagebox, ttk
 
-from mailsinif import oku, rapor
+from mailsinif import duzeltme, oku, rapor
 from mailsinif.motor import Motor
 
 RENK_ACIL, RENK_KONTROL = "#FCE4D6", "#FFF2CC"
@@ -44,6 +44,13 @@ class Uygulama(tk.Tk):
         self.dugme.pack(side="left", padx=(10, 0))
         self.excel_dugme = ttk.Button(ust, text="Excel'e kaydet", command=self.kaydet, state="disabled")
         self.excel_dugme.pack(side="left", padx=(6, 0))
+
+        alt = ttk.Frame(self, padding=(10, 0))
+        alt.pack(fill="x")
+        ttk.Button(alt, text="Düzeltmeleri yükle…", command=self.duzeltmeleri_yukle).pack(side="left")
+        ttk.Button(alt, text="Fabrika modeline dön", command=self.fabrikaya_don).pack(side="left", padx=6)
+        ttk.Label(alt, text="(Excel'deki Kontrol listesinde 'Doğru kategori'yi doldurup kaydedin, sonra buradan yükleyin)",
+                  foreground="#666").pack(side="left", padx=6)
 
         self.ozet = tk.StringVar(value=".eml, .mbox veya .csv dosyalarının bulunduğu klasörü seçin.")
         ttk.Label(self, textvariable=self.ozet, padding=(10, 0)).pack(fill="x")
@@ -123,6 +130,10 @@ class Uygulama(tk.Tk):
                     self.ozet.set(f"Sınıflandırılıyor… {o[1]}/{o[2]}")
                 elif o[0] == "bitti":
                     self.bitti(o[1], o[2])
+                elif o[0] == "egitildi":
+                    self.calisiyor = False
+                    self.dugme.config(state="normal")
+                    self.ozet.set(o[1])
                 elif o[0] == "hata":
                     self.calisiyor = False
                     self.dugme.config(state="normal")
@@ -139,7 +150,8 @@ class Uygulama(tk.Tk):
         for s in sonuc:
             etiket = ("acil",) if s["acil"] else (("kontrol",) if s["kontrol"] else ())
             self.tablo.insert("", "end", tags=etiket, values=(
-                s["kaynak"], s["konu"], s["kategori"], f"{s['guven']:.0%}", "ACİL" if s["acil"] else "",
+                s["kaynak"], s["konu"], s["kategori"], "—" if s["kategori"] == "Belirsiz" else f"{s['guven']:.0%}",
+                "ACİL" if s["acil"] else "",
                 "kontrol et" if s["kontrol"] else ""))
         n = len(sonuc)
         bel = sum(s["kategori"] == "Belirsiz" for s in sonuc)
@@ -149,6 +161,48 @@ class Uygulama(tk.Tk):
             metin += f" {len(hatalar)} dosya okunamadı."
         self.ozet.set(metin if n else "Klasörde okunabilir mail bulunamadı (.eml, .mbox, .csv).")
         self.excel_dugme.config(state="normal" if n else "disabled")
+
+    def duzeltmeleri_yukle(self):
+        if self.calisiyor:
+            return
+        yol = filedialog.askopenfilename(title="Düzeltilmiş Excel raporunu seçin", filetypes=[("Excel", "*.xlsx")])
+        if not yol:
+            return
+        try:
+            duzeltmeler, uyarilar = duzeltme.excel_oku(yol)
+        except Exception as e:
+            messagebox.showerror("Okunamadı", str(e))
+            return
+        if not duzeltmeler:
+            messagebox.showinfo("Düzeltme yok", "Kontrol listesinde 'Doğru kategori' sütunu doldurulmuş satır bulunamadı.")
+            return
+        metin = f"{len(duzeltmeler)} düzeltme bulundu. Model bunlarla yeniden eğitilsin mi?\n(Birkaç saniye sürer.)"
+        if uyarilar:
+            metin += f"\n\n{len(uyarilar)} satır atlandı."
+        if not messagebox.askyesno("Modeli yeniden eğit", metin):
+            return
+        self.calisiyor = True
+        self.dugme.config(state="disabled")
+        self.ozet.set("Model yeniden eğitiliyor…")
+        threading.Thread(target=self.yeniden_egit, args=(duzeltmeler,), daemon=True).start()
+
+    def yeniden_egit(self, duzeltmeler):
+        try:
+            tum, yeni = duzeltme.kaydet(duzeltmeler)
+            self.motor = Motor.duzeltmelerle_yeniden_egit(tum)
+            self.kuyruk.put(("egitildi", f"Model {len(tum)} düzeltmeyle yeniden eğitildi ({yeni} yeni). Klasörü tekrar sınıflandırabilirsiniz."))
+        except Exception as e:
+            self.kuyruk.put(("hata", str(e)))
+
+    def fabrikaya_don(self):
+        if self.calisiyor:
+            return
+        if messagebox.askyesno("Fabrika modeline dön",
+                               "Kaydedilmiş düzeltmeler silinecek ve model ilk haline dönecek. Devam edilsin mi?"):
+            Motor.sifirla()
+            duzeltme.sil()
+            self.motor = Motor.yukle_veya_egit()
+            self.ozet.set("Fabrika modeline dönüldü.")
 
     def kaydet(self):
         yol = filedialog.asksaveasfilename(defaultextension=".xlsx", filetypes=[("Excel", "*.xlsx")],

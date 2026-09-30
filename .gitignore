@@ -11,3 +11,6 @@ model/
 build/
 dist/
 *.spec
+duzeltmeler.jsonl
+kullanici_model/
+!teslimat/*.xlsx

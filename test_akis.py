@@ -64,6 +64,44 @@ with tempfile.TemporaryDirectory() as d:
         if s["kategori"] != b:
             print(f"  yanlış: {s['konu']!r} beklenen={b} tahmin={s['kategori']} güven={s['guven']}")
 
+# düzeltme döngüsü: Excel'de "Doğru kategori" doldur → geri oku → yeniden eğit
+from mailsinif import duzeltme, motor as motor_modulu
+from mailsinif.ml import _metin
+
+with tempfile.TemporaryDirectory() as d:
+    duzeltme.DUZELTME_DOSYASI = os.path.join(d, "duzeltmeler.jsonl")
+    motor_modulu.KULLANICI_MODEL_YOLU = os.path.join(d, "kullanici_model", "ml.joblib")
+    ornekler = [
+        {"kaynak": "1", "gonderen": "", "konu": "Merhaba", "govde": "Bakar mısınız " + "x" * 400, "kategori": "Belirsiz",
+         "guven": 0.2, "acil": False, "kontrol": True},
+        {"kaynak": "2", "gonderen": "", "konu": "Bir şey", "govde": "Fiyat listesi gönderin lütfen", "kategori": "Belirsiz",
+         "guven": 0.3, "acil": False, "kontrol": True},
+    ]
+    yol = os.path.join(d, "r.xlsx")
+    rapor.yaz(ornekler, yol)
+    wb = load_workbook(yol)
+    ws = wb["Kontrol listesi"]
+    assert ws.column_dimensions["H"].hidden
+    ws.cell(2, 6).value = "Soru / Bilgi"
+    ws.cell(3, 6).value = "Geçersiz kategori"
+    wb.save(yol)
+    dz, uy = duzeltme.excel_oku(yol)
+    assert len(dz) == 1 and len(uy) == 1, (dz, uy)
+    assert dz[0]["govde"].endswith("x" * 400), "tam metin gelmedi (önizlemeyle kısaltılmış)"
+    tum, yeni = duzeltme.kaydet(dz)
+    tum, yeni2 = duzeltme.kaydet(dz)  # aynı düzeltme tekrar yüklenirse çoğalmamalı
+    assert len(tum) == 1 and yeni == 1 and yeni2 == 0
+    once = Motor.egit(kaydet=False).ml.olasiliklar([dz[0]])[0]
+    yeni_motor = Motor.duzeltmelerle_yeniden_egit(tum)
+    sonra = yeni_motor.ml.olasiliklar([dz[0]])[0]
+    i = yeni_motor.ml.siniflar.index("Soru / Bilgi")
+    assert os.path.exists(motor_modulu.KULLANICI_MODEL_YOLU)
+    assert sonra[i] > once[i], (once[i], sonra[i])
+    assert type(Motor.yukle_veya_egit()) is Motor  # kullanıcı modelini yükler
+    Motor.sifirla()
+    assert not os.path.exists(motor_modulu.KULLANICI_MODEL_YOLU)
+    print(f"düzeltme döngüsü tamam: düzeltilen mailin 'Soru / Bilgi' olasılığı {once[i]:.2f} → {sonra[i]:.2f}")
+
 # pencere açılıp kapanıyor mu
 import tkinter as tk
 from uygulama import Uygulama
