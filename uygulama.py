@@ -144,5 +144,19 @@ class Uygulama(tk.Tk):
             messagebox.showerror("Kaydedilemedi", str(e))
 
 
+def otomatik_test(klasor: str, cikti: str) -> int:
+    """Pencere açmadan: klasörü oku, sınıflandır, Excel yaz. Paketlenmiş .exe'nin doğrulanması için (--test)."""
+    motor = Motor.yukle_veya_egit()
+    mailler, hatalar = oku.oku_klasor(klasor)
+    sonuc = [{**m, **motor.siniflandir(m["konu"], m["govde"])} for m in mailler]
+    rapor.yaz(sonuc, cikti, hatalar)
+    with open(cikti + ".txt", "w", encoding="utf-8") as f:
+        f.write(f"{len(sonuc)} mail, {len(hatalar)} okunamayan\n")
+    return 0 if sonuc else 1
+
+
 if __name__ == "__main__":
+    import sys
+    if len(sys.argv) == 4 and sys.argv[1] == "--test":
+        raise SystemExit(otomatik_test(sys.argv[2], sys.argv[3]))
     Uygulama().mainloop()

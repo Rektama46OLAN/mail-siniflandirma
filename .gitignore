@@ -8,3 +8,6 @@ venv/
 secrets*
 *.xlsx
 model/
+build/
+dist/
+*.spec

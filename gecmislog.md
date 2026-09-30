@@ -60,3 +60,9 @@ Yarım kalan işler buraya değil `gecmis.md`'ye yazılır.
 - Ne yapıldı: `mailsinif/oku.py` (.eml/.mbox/.csv, HTML gövde temizleme), `motor.py` (birleşik motor, model kaydet/yükle), `rapor.py` (Özet, Mailler, Kontrol listesi + açılır liste, Okunamayanlar), `uygulama.py` (Tkinter; arka plan iş parçacığı, ilerleme, renkli tablo, Excel'e kaydet), `test_akis.py`, `ornek_mailler/yeni_mailler.csv` (16 elle yazılmış, eğitim setinde olmayan mail), README.md.
 - Yol boyunca çıkanlar: Test klasörüne bilerek konan bozuk CSV okunamayanlara düştü, akış durmadı. Elle yazılan 16 yeni mailde 15/16 doğru (küçük örnek ve kuralları bilerek yazıldığı için iyimser; tek hata "iade parası yatmadı", Şikayet yerine Fatura, zaten sınırda bir mail). Pencere yalnızca programatik olarak sürüldü, düğme tıklaması/dosya diyalogları elle denenmedi.
 - Dokunulan dosyalar: mailsinif/oku.py, motor.py, rapor.py, uygulama.py, test_akis.py, ornek_mailler/, README.md, requirements.txt, .gitignore
+
+## [2026-09-30] Faz 4b: Windows paketleme — TAMAMLANDI
+- Ne yapıldı: `mailsinif/yollar.py` (geliştirme/paketli yol ayrımı, kullanıcı verisi için %APPDATA%), `derle.py` (modeli eğitip PyInstaller onedir ile `dist/MailSiniflandirma/` üretir, 169 MB), `uygulama.py`'ye `--test KLASOR CIKTI.xlsx` modu, `teslimat/KURULUM.md` (SmartScreen adımlı müşteri yönergesi). Arda imzasız + onedir yaklaşımını kabul etti.
+- Yol boyunca çıkanlar: Yollar `__file__`'a göre hesaplanıyordu, `.exe`'de bozulurdu; `sys._MEIPASS`'e alındı. PATH'ten Python çıkarılmış ortamda `.exe --test` 16 mailden Excel üretti (çıkış kodu 0); pencere açıldı ("Mail Sınıflandırma"). İlk çalıştırma 19 sn, ikinci 2 sn (soğuk başlangıç/Defender taraması); müşteriye yönergede belirtildi, isteğe bağlı açılış ekranı yapılabilir.
+- Doğrulanmayanlar: gerçek temiz makine/Windows Sandbox denemesi, kod imzası, Mac.
+- Dokunulan dosyalar: mailsinif/yollar.py, olcum.py, uygulama.py, derle.py, teslimat/KURULUM.md, notes.md, .gitignore

@@ -6,8 +6,7 @@ import re
 from collections import Counter
 
 from .kural import KATEGORILER
-
-KOK = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+from .yollar import KAYNAK as KOK
 
 
 def yukle(klasor: str = "data/uretim") -> list[dict]:
