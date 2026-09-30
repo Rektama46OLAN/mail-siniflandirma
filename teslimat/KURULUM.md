@@ -8,8 +8,8 @@
 > **"Windows bilgisayarınızı korudu" uyarısı çıkarsa bu normaldir.** Program henüz Microsoft'a kayıtlı bir yayıncı imzası taşımıyor.
 > **Daha fazla bilgi** → **Yine de çalıştır** deyin. Bu uyarı yalnızca ilk açılışta çıkar.
 
-> **İlk açılış 20-30 saniye sürebilir** (Windows programı tarar). Pencere görünene kadar bekleyin, tekrar tıklamayın.
-> Sonraki açılışlar birkaç saniyedir.
+> **İlk açılış 20-30 saniye sürebilir** (Windows programı tarar). Bu sürede mavi bir "Yükleniyor" ekranı görünür;
+> ana pencere açılana kadar bekleyin, tekrar tıklamayın. Sonraki açılışlar birkaç saniyedir.
 
 ## Kullanım
 1. **Seç…** ile mail dosyalarının bulunduğu klasörü seçin (`.eml`, `.mbox` veya `.csv`).

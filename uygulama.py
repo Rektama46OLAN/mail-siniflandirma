@@ -13,6 +13,15 @@ from mailsinif.motor import Motor
 RENK_ACIL, RENK_KONTROL = "#FCE4D6", "#FFF2CC"
 
 
+def acilis_ekranini_kapat():
+    """Paketlenmiş .exe'de PyInstaller açılış ekranını kapatır (geliştirmede modül yoktur, sessizce geçilir)."""
+    try:
+        import pyi_splash
+        pyi_splash.close()
+    except Exception:
+        pass
+
+
 class Uygulama(tk.Tk):
     def __init__(self):
         super().__init__()
@@ -56,6 +65,15 @@ class Uygulama(tk.Tk):
         self.tablo.pack(side="left", fill="both", expand=True)
         kay.pack(side="right", fill="y")
         self.after(100, self.kuyruk_isle)
+        self.on_yukleme = threading.Thread(target=self.modeli_yukle, daemon=True)  # pencere açılır açılmaz model hazırlanır
+        self.on_yukleme.start()
+        self.after(300, acilis_ekranini_kapat)
+
+    def modeli_yukle(self):
+        try:
+            self.motor = Motor.yukle_veya_egit()
+        except Exception:
+            self.motor = None  # hata, sınıflandırma sırasında tekrar denenip kullanıcıya gösterilir
 
     def sec(self):
         k = filedialog.askdirectory(title="Mail klasörünü seçin")
@@ -79,8 +97,10 @@ class Uygulama(tk.Tk):
     def is_parcacigi(self, klasor):
         try:
             if self.motor is None:
-                self.kuyruk.put(("mesaj", "Model hazırlanıyor (ilk çalıştırmada birkaç saniye sürer)…"))
-                self.motor = Motor.yukle_veya_egit()
+                self.kuyruk.put(("mesaj", "Model hazırlanıyor…"))
+                self.on_yukleme.join()
+                if self.motor is None:
+                    self.motor = Motor.yukle_veya_egit()
             self.kuyruk.put(("mesaj", "Mailler okunuyor…"))
             mailler, hatalar = oku.oku_klasor(klasor)
             sonuc = []

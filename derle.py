@@ -24,6 +24,7 @@ sep = os.pathsep
 komut = [
     sys.executable, "-m", "PyInstaller", "--noconfirm", "--onedir", "--windowed",
     "--name", "MailSiniflandirma",
+    "--splash", f"assets{os.sep}acilis.png",  # Python başlamadan gösterilir; uygulama pencereyi açınca kapatır
     "--add-data", f"model{sep}model",
     "--add-data", f"data{os.sep}uretim{sep}data{os.sep}uretim",
     "--add-data", f"ornek_mailler{sep}ornek_mailler",
