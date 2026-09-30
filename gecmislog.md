@@ -40,3 +40,8 @@ Yarım kalan işler buraya değil `gecmis.md`'ye yazılır.
 - Ne yapıldı: `mailsinif/` (metin, kural, ölçüm) ve `olc_kural.py`. Dev/test bölünmesiyle ölçüldü; test'te emin maillerde %76,9, genel %70,9, Belirsiz %17,0, Acil %76/%92.
 - Yol boyunca çıkanlar: İlk atış (ayarsız) emin maillerde %61,5/%68,6 idi. Dev hatalarına bakılarak ayar yapılınca dev %81,7, test %76,9: ~5 puan şişme. Ana hatalar: "sipariş" kelimesi şikayet/fatura mailini çekiyor, "hediye/kampanya" meşru müşteri mailini Spam'e atıyor. Şikayet test recall %17: dolaylı anlatım kalıpla yakalanmıyor. Çalıştırma sırasında sunucu tarafı izin sınıflandırıcısı art arda 5 kez "no verdict" verdi; geçici, sonra çalıştı.
 - Dokunulan dosyalar: mailsinif/*, olc_kural.py, reports/2026-09-30-kural-ilk-atis.md, reports/2026-09-30-kural-baseline.md, notes.md
+
+## [2026-09-30] Faz 3: ML kıyası — TAMAMLANDI
+- Ne yapıldı: `mailsinif/ml.py` (TF-IDF kelime+karakter n-gram + lojistik regresyon, Belirsiz olasılık eşiği), `olc_ml.py`. Aynı dev/test bölünmesinde kural %76,9, ML %71,2, birleşik %77,2 (emin doğruluk); ML tüm veride 5-katlı CV %77,3.
+- Yol boyunca çıkanlar: scikit-learn kurulu değildi, pip ile kuruldu (requirements.txt eklendi). Eşik ızgarasında yüksek eşik tüm mailleri Belirsiz yapıp sıfıra bölme hatası verdi; boş "emin" kümesi atlandı. Fark kural/birleşik arasında n=141'de gürültü sınırında.
+- Dokunulan dosyalar: mailsinif/ml.py, olc_ml.py, requirements.txt, reports/2026-09-30-kural-ml-kiyas.md, notes.md

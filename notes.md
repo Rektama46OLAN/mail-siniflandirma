@@ -76,6 +76,10 @@ sonrası ilerleyebilir ama sonuçlar "onaysız etiket" ile üretilir; 1b onayı 
 
 ## Açık maddeler
 
+- **%90 hedefi ulaşılmadı** (kural %76,9, ML %71,2, birleşik %77,2 test'te). Faz 3 raporu: `reports/2026-09-30-kural-ml-kiyas.md`.
+  Karar Arda'da: (a) birleşik yöntemi seç + veriyi artır (özellikle Şikayet/Spam/Belirsiz, gerçek temizlenmiş mail), (b) hedefi revize et, (c) opsiyonel LLM katmanını öne al.
+  Yöntem seçimi const.md'ye Arda onaylayınca geçer.
+
 - GUI toolkit seçimi (Tkinter yerleşik ve bağımlılıksız — öneri; Arda onaylamadı).
 - KVKK / veri işleme koşulları (opsiyonel LLM katmanı için) — değerlendirilmedi.
 - Teklif metni, fiyatlandırma, hedef müşteri listesi — konuşulmadı.

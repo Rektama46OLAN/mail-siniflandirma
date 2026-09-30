@@ -18,7 +18,7 @@ Bir madde tamamlandığında buradan silinir ve özeti `gecmislog.md`'ye taşın
 
 ## Açık işler
 
-## [2026-09-30] Faz 3: ML kıyası
-- Durum: Başlamadı. Faz 2 kapandı (kural baseline test'te emin maillerde %76,9).
-- Sonraki adım: scikit-learn kurulumu kontrolü, TF-IDF + lojistik regresyon, aynı dev/test bölünmesi, olasılık eşiğiyle Belirsiz; kural/ML/birleşik tablosu `reports/`'a.
-- Bağlam: notes.md Faz 3, reports/2026-09-30-kural-baseline.md. Gerçek rakam test sütunudur.
+## [2026-09-30] Yöntem ve hedef kararı (Arda bekleniyor)
+- Durum: Faz 3 bitti; hiçbir yöntem %90'a yaklaşmadı (kural %76,9, ML %71,2, birleşik %77,2 test'te, emin maillerde).
+- Sonraki adım: Arda karar verir: (a) birleşik yöntem + daha çok/gerçek veri, (b) hedefi revize et, (c) LLM katmanını öne al. Karar gelince const.md'ye yazılır; sonra Faz 4 (masaüstü pencere + Excel).
+- Bağlam: reports/2026-09-30-kural-ml-kiyas.md, notes.md "Açık maddeler". Faz 4 arayüz/Excel kodu sınıflandırıcıdan bağımsız yazılabilir (sınıflandırıcı fonksiyon olarak takılır).
