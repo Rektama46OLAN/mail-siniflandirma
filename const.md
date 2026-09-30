@@ -23,8 +23,8 @@ diye tekrar tartışılır; asıl maliyet orada.
   Gerekçe: Arda ve Rekt'in 2026-09-29 tartışmasında seçildi; yazılı ulaşım rahat, yüz yüze satış istenmiyor. Sektör uyarlaması sonra "paket" olarak eklenir.
 - **Kategoriler: Sipariş/Talep, Fatura/Ödeme, Şikayet/Sorun, Soru/Bilgi, Belge/Evrak, Otomatik bildirim, Reklam/Spam, Belirsiz. Acil kategori değil, ayrı bir özelliktir.**
   Gerekçe: Liste Arda tarafından "tam" diye onaylandı. "Belirsiz" zorla tahmin yerine emin olunmayan maili insana bırakır; doğruluk "ayırdığının %X'i doğru" diye sunulabilir.
-- **Doğruluk hedefi: emin olunan maillerde %90 üstü; mailin en fazla %15-20'si Belirsiz.**
-  Gerekçe: Arda 2026-09-29'da onayladı.
+- ~~**Doğruluk hedefi: emin olunan maillerde %90 üstü; mailin en fazla %15-20'si Belirsiz.**~~ **YERİNE GEÇİLDİ 2026-09-30** (aşağıda Stack → "Çalışma noktası").
+  Gerekçe: Arda 2026-09-29'da onaylamıştı; ölçüm iki koşulun birlikte sağlanamadığını gösterdi (%90 için Belirsiz ~%44 gerekiyor). Satır tarihçe için duruyor.
 - **Kanıt projesi bağlantısız çalışır; mail dosyalarını (.eml/.mbox/CSV) okur, IMAP yok.**
   Gerekçe: Teklif aşamasında ana kanıt elle etiketlenmiş test setindeki doğruluk rakamıdır. Sıra: kanıt projesi → teklifler.
 - **Gerçek müşteri maili kullanılmaz; kendi gelen kutusundan alınacaksa kişisel bilgiler temizlenir.**
@@ -51,6 +51,11 @@ diye tekrar tartışılır; asıl maliyet orada.
   Gerekçe: En düşük riskli başlangıç. Resmi API/OAuth sonraki aşama. Şu an kapsam dışı.
 - **Sınıflandırıcı, masaüstü penceresi ve Excel raporu kodu tek ana agent tarafından yazılır.**
   Gerekçe: Birbirine sıkı bağlı, bölünmez; her subagent sıfırdan başladığı için bağlam yükü kazancı geçer.
+
+- **Paketleme: PyInstaller onedir (klasör), imzasız, yalnızca Windows; müşteriye SmartScreen adımlı kurulum yönergesi verilir; açılışta PyInstaller açılış ekranı gösterilir.**
+  Gerekçe: İmzasız indirilen her `.exe` SmartScreen uyarısı verir (paketleme aracından bağımsız); imza sertifikası yılda ~100-400 $, ilk ödeyen müşteriye kadar ertelendi. Onedir'in tek dosyadan daha az antivirüs yanlış alarmı verdiği yaygın deneyim (bu projede ölçülmedi). İlk açılış (soğuk) 28 sn sürdü, ikinci açılış 1,6 sn; müşteri boş ekrana bakmasın diye açılış ekranı eklendi (Arda istedi).
+- **Müşteri düzeltmeleri Excel'in "Kontrol listesi"nden pencereye geri yüklenir; yeniden eğitim kullanıcı klasörüne (%APPDATA%) yazılır, pakete gömülü model korunur ("Fabrika modeline dön" mümkün); düzeltme ağırlığı 3.**
+  Gerekçe: Gömülü modeli ezmek geri dönüşü kapatırdı; yanlış düzeltme yapılırsa fabrikaya dönülebilmeli. Simülasyonda ~20 düzeltme genel doğruluğu yalnızca +1,4 puan artırdı: iyileşme gerçek ama yavaş, teklifte öyle söylenir.
 
 ### Geliştirme
 
