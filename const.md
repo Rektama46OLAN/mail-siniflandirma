@@ -36,6 +36,8 @@ diye tekrar tartışılır; asıl maliyet orada.
   Gerekçe: Müşteri verisi dışarı çıkmasın; maliyet sıfır. LLM yalnızca opsiyonel katman (düşük güvenli, müşteri onaylı, mümkünse müşterinin kendi API anahtarı).
 - **ML zorunlu değil: önce kural tabanlı baseline, sonra aynı sette ML kıyası; belirgin iyi olan seçilir, gerekirse önce kural sonra ML.**
   Gerekçe: Test setini biz yazdığımız için kurallar sentetik veride iyi görünür; kıyas olmadan seçim kanıtsız olur. Kural "Belirsiz"i kaba (eşleşme sayısı) verir, ML olasılık verdiği için eşik ayarı kolaydır.
+- **Sınıflandırma yöntemi birleşiktir: önce kural (emin ise), emin değilse ML (TF-IDF + lojistik regresyon, olasılık eşiğiyle Belirsiz).**
+  Gerekçe: 2026-09-30 kıyasında (test, n=141) emin doğruluk kural %76,9, ML %71,2, birleşik %77,2; fark gürültü sınırında ama birleşik Belirsiz'i %17'den %9,9'a indirip daha çok mail sınıflandırıyor (genel doğruluk %74,5 ile en iyi). Kural ve ML farklı kategorilerde güçlü (ML Spam/Şikayet, kural Fatura/Sipariş). Arda 2026-09-30'da onayladı. Rapor: reports/2026-09-30-kural-ml-kiyas.md.
 - **Arayüz basit masaüstü penceresi, rapor Excel.**
   Gerekçe: Müşteri komut satırı değil düzgün bir şey görmeli; e-ticaret satıcıları Excel'e alışık.
 

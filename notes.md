@@ -76,9 +76,11 @@ sonrası ilerleyebilir ama sonuçlar "onaysız etiket" ile üretilir; 1b onayı 
 
 ## Açık maddeler
 
-- **%90 hedefi ulaşılmadı** (kural %76,9, ML %71,2, birleşik %77,2 test'te). Faz 3 raporu: `reports/2026-09-30-kural-ml-kiyas.md`.
-  Karar Arda'da: (a) birleşik yöntemi seç + veriyi artır (özellikle Şikayet/Spam/Belirsiz, gerçek temizlenmiş mail), (b) hedefi revize et, (c) opsiyonel LLM katmanını öne al.
-  Yöntem seçimi const.md'ye Arda onaylayınca geçer.
+- **Doğruluk hedefi revizyonu (Arda karar verecek).** Birleşik yöntem seçildi (const.md). Doğruluk-kapsam eğrisi (`reports/2026-09-30-dogruluk-kapsam-egrisi.md`):
+  >%90 doğruluk için Belirsiz ≈%40-45 gerekiyor; Belirsiz %15-20'de doğruluk ≈%83-85. Eski hedef çifti (>%90 ve ≤%15-20) sağlanamıyor.
+  Seçenekler: (1) "%90 doğru, yarısı insana" (2) "%80'ini ayırır, %85 doğru" (3) sentetikte kalarak veri artışıyla eğriyi yukarı kaydırmak.
+  Gerçek test seti kullanılmayacak (Arda: kendi maillerinde e-ticaret yok); rakamlar sentetik, teklifte bu açıkça söylenmeli.
+- **Ürün özelliği:** Excel'deki "yanlışları görme listesi" müşteri düzeltmelerini toplayıp yeniden eğitimi besleyecek ("kullandıkça öğrenir"). Faz 4/5'e girer.
 
 - GUI toolkit seçimi (Tkinter yerleşik ve bağımlılıksız — öneri; Arda onaylamadı).
 - KVKK / veri işleme koşulları (opsiyonel LLM katmanı için) — değerlendirilmedi.

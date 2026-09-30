@@ -45,3 +45,8 @@ Yarım kalan işler buraya değil `gecmis.md`'ye yazılır.
 - Ne yapıldı: `mailsinif/ml.py` (TF-IDF kelime+karakter n-gram + lojistik regresyon, Belirsiz olasılık eşiği), `olc_ml.py`. Aynı dev/test bölünmesinde kural %76,9, ML %71,2, birleşik %77,2 (emin doğruluk); ML tüm veride 5-katlı CV %77,3.
 - Yol boyunca çıkanlar: scikit-learn kurulu değildi, pip ile kuruldu (requirements.txt eklendi). Eşik ızgarasında yüksek eşik tüm mailleri Belirsiz yapıp sıfıra bölme hatası verdi; boş "emin" kümesi atlandı. Fark kural/birleşik arasında n=141'de gürültü sınırında.
 - Dokunulan dosyalar: mailsinif/ml.py, olc_ml.py, requirements.txt, reports/2026-09-30-kural-ml-kiyas.md, notes.md
+
+## [2026-09-30] Yöntem kararı ve doğruluk-kapsam eğrisi — TAMAMLANDI
+- Ne yapıldı: Arda birleşik yöntemi onayladı (const.md'ye girdi); gerçek mail yerine sentetikte kalınacak. Öğrenme eğrisi (55→220 mail: doğruluk %72,4→%76,7, Belirsiz %34→%12,7) ve `olc_egri.py` ile doğruluk-kapsam eğrisi çıkarıldı.
+- Yol boyunca çıkanlar: %90 doğruluk ≈%55 kapsam demek; eski hedef çifti (>%90 ve ≤%15-20 Belirsiz) birlikte sağlanamıyor. Eşikler ölçüm verisinde tarandığından eğri hafif iyimser.
+- Dokunulan dosyalar: const.md, notes.md, olc_egri.py, reports/2026-09-30-dogruluk-kapsam-egrisi.md

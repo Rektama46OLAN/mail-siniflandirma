@@ -18,7 +18,7 @@ Bir madde tamamlandığında buradan silinir ve özeti `gecmislog.md`'ye taşın
 
 ## Açık işler
 
-## [2026-09-30] Yöntem ve hedef kararı (Arda bekleniyor)
-- Durum: Faz 3 bitti; hiçbir yöntem %90'a yaklaşmadı (kural %76,9, ML %71,2, birleşik %77,2 test'te, emin maillerde).
-- Sonraki adım: Arda karar verir: (a) birleşik yöntem + daha çok/gerçek veri, (b) hedefi revize et, (c) LLM katmanını öne al. Karar gelince const.md'ye yazılır; sonra Faz 4 (masaüstü pencere + Excel).
-- Bağlam: reports/2026-09-30-kural-ml-kiyas.md, notes.md "Açık maddeler". Faz 4 arayüz/Excel kodu sınıflandırıcıdan bağımsız yazılabilir (sınıflandırıcı fonksiyon olarak takılır).
+## [2026-09-30] Doğruluk hedefi revizyonu (Arda bekleniyor, Faz 4'ü engellemez)
+- Durum: Yöntem seçildi (birleşik, const.md). Eğri çıkarıldı: >%90 için Belirsiz ≈%40-45; %15-20 Belirsiz'de doğruluk ≈%83-85.
+- Sonraki adım: Arda hedefi seçer (notes.md "Açık maddeler"); const.md'ye yazılır. Faz 4 arayüzde kapsam/eşik ayarı bu karara göre son hâlini alır.
+- Bağlam: reports/2026-09-30-dogruluk-kapsam-egrisi.md. Arda Faz 4'e geçilmesini açıkça onayladı.
