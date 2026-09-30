@@ -30,3 +30,13 @@ Yarım kalan işler buraya değil `gecmis.md`'ye yazılır.
 - Ne yapıldı: 8 Sonnet subagent kategori başına yapay mail yazdı; toplam 275 mail (7×35 + Belirsiz 30), `data/uretim/*.jsonl`.
 - Yol boyunca çıkanlar: Hiçbir ajan çıktısını doğrulamamıştı. Şema kontrolünde `soru.jsonl` 26. satırda eksik tırnak (`kisilik":"kisa",kategori"`) bulundu ve elle düzeltildi; ajan "fazla alanı çıkardım" derken bozmuştu. Ajan raporlarına güvenmeden dosya ayrıştırılmalı.
 - Dokunulan dosyalar: data/uretim/*.jsonl
+
+## [2026-09-30] Faz 1b: etiket onayı — TAMAMLANDI
+- Ne yapıldı: Arda uyuşmazlık raporunu inceledi ve etiketleri doğru buldu; yazarın etiketleri korundu, düzeltme yapılmadı. Set donduruldu (275 mail).
+- Yol boyunca çıkanlar: Arda'nın cevabı "hepsi doğru gibi duruyor" idi; bunu yazar etiketlerinin onayı olarak yorumladım (bağımsız etiket değil). Yanlışsa bildirilir, set yeniden açılır.
+- Dokunulan dosyalar: reports/2026-09-30-etiket-denetimi.md, data/denetim/*
+
+## [2026-09-30] Faz 2: kural tabanlı baseline — TAMAMLANDI
+- Ne yapıldı: `mailsinif/` (metin, kural, ölçüm) ve `olc_kural.py`. Dev/test bölünmesiyle ölçüldü; test'te emin maillerde %76,9, genel %70,9, Belirsiz %17,0, Acil %76/%92.
+- Yol boyunca çıkanlar: İlk atış (ayarsız) emin maillerde %61,5/%68,6 idi. Dev hatalarına bakılarak ayar yapılınca dev %81,7, test %76,9: ~5 puan şişme. Ana hatalar: "sipariş" kelimesi şikayet/fatura mailini çekiyor, "hediye/kampanya" meşru müşteri mailini Spam'e atıyor. Şikayet test recall %17: dolaylı anlatım kalıpla yakalanmıyor. Çalıştırma sırasında sunucu tarafı izin sınıflandırıcısı art arda 5 kez "no verdict" verdi; geçici, sonra çalıştı.
+- Dokunulan dosyalar: mailsinif/*, olc_kural.py, reports/2026-09-30-kural-ilk-atis.md, reports/2026-09-30-kural-baseline.md, notes.md

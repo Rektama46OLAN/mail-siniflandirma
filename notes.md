@@ -57,6 +57,15 @@ sonrası ilerleyebilir ama sonuçlar "onaysız etiket" ile üretilir; 1b onayı 
 
 ---
 
+## Ölçüm protokolü (Faz 2-3)
+
+- Dev = çift numaralı id (~137 mail), test = tek numaralı id (~138 mail). Kurallar/eşikler yalnızca dev hatalarına bakılarak ayarlanır; test'e ayar sırasında bakılmaz.
+- İlk kural sürümü mailler okunmadan, alan bilgisiyle yazıldı; ayarsız ilk ölçüm `reports/`'ta "ilk atış" olarak saklanır.
+- Raporlanan rakamlar: genel doğruluk (Belirsiz de sınıf), emin olunan maillerde doğruluk (tahmin≠Belirsiz), Belirsiz oranı, Acil precision/recall, kategori bazında recall/precision.
+- Kod: `mailsinif/` (metin, kural, olcum), çalıştırma `python olc_kural.py [--hatalar dev]`.
+
+---
+
 ## Fikirler
 
 - Gerçek (temizlenmiş) birkaç mail test setine eklensin — sentetik veri kuralları olduğundan iyi gösterir.
