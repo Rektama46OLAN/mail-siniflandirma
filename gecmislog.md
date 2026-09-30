@@ -50,3 +50,13 @@ Yarım kalan işler buraya değil `gecmis.md`'ye yazılır.
 - Ne yapıldı: Arda birleşik yöntemi onayladı (const.md'ye girdi); gerçek mail yerine sentetikte kalınacak. Öğrenme eğrisi (55→220 mail: doğruluk %72,4→%76,7, Belirsiz %34→%12,7) ve `olc_egri.py` ile doğruluk-kapsam eğrisi çıkarıldı.
 - Yol boyunca çıkanlar: %90 doğruluk ≈%55 kapsam demek; eski hedef çifti (>%90 ve ≤%15-20 Belirsiz) birlikte sağlanamıyor. Eşikler ölçüm verisinde tarandığından eğri hafif iyimser.
 - Dokunulan dosyalar: const.md, notes.md, olc_egri.py, reports/2026-09-30-dogruluk-kapsam-egrisi.md
+
+## [2026-09-30] Doğruluk hedefi kararı — TAMAMLANDI
+- Ne yapıldı: Arda "%80'ini ayırır, ayırdığının %85'i doğru" senaryosunu seçti; const.md'ye çalışma noktası (kural güveni 0,5, ML eşiği 0,5) ve Tkinter kararı yazıldı.
+- Yol boyunca çıkanlar: const.md'de eski "Arayüz" maddesi yeni maddeyle çiftlendi; tek maddede birleştirildi.
+- Dokunulan dosyalar: const.md
+
+## [2026-09-30] Faz 4: masaüstü pencere ve Excel rapor — TAMAMLANDI
+- Ne yapıldı: `mailsinif/oku.py` (.eml/.mbox/.csv, HTML gövde temizleme), `motor.py` (birleşik motor, model kaydet/yükle), `rapor.py` (Özet, Mailler, Kontrol listesi + açılır liste, Okunamayanlar), `uygulama.py` (Tkinter; arka plan iş parçacığı, ilerleme, renkli tablo, Excel'e kaydet), `test_akis.py`, `ornek_mailler/yeni_mailler.csv` (16 elle yazılmış, eğitim setinde olmayan mail), README.md.
+- Yol boyunca çıkanlar: Test klasörüne bilerek konan bozuk CSV okunamayanlara düştü, akış durmadı. Elle yazılan 16 yeni mailde 15/16 doğru (küçük örnek ve kuralları bilerek yazıldığı için iyimser; tek hata "iade parası yatmadı", Şikayet yerine Fatura, zaten sınırda bir mail). Pencere yalnızca programatik olarak sürüldü, düğme tıklaması/dosya diyalogları elle denenmedi.
+- Dokunulan dosyalar: mailsinif/oku.py, motor.py, rapor.py, uygulama.py, test_akis.py, ornek_mailler/, README.md, requirements.txt, .gitignore

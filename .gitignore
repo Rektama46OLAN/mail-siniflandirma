@@ -7,3 +7,4 @@ venv/
 *.secret
 secrets*
 *.xlsx
+model/

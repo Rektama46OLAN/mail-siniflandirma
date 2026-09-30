@@ -18,7 +18,7 @@ Bir madde tamamlandığında buradan silinir ve özeti `gecmislog.md`'ye taşın
 
 ## Açık işler
 
-## [2026-09-30] Doğruluk hedefi revizyonu (Arda bekleniyor, Faz 4'ü engellemez)
-- Durum: Yöntem seçildi (birleşik, const.md). Eğri çıkarıldı: >%90 için Belirsiz ≈%40-45; %15-20 Belirsiz'de doğruluk ≈%83-85.
-- Sonraki adım: Arda hedefi seçer (notes.md "Açık maddeler"); const.md'ye yazılır. Faz 4 arayüzde kapsam/eşik ayarı bu karara göre son hâlini alır.
-- Bağlam: reports/2026-09-30-dogruluk-kapsam-egrisi.md. Arda Faz 4'e geçilmesini açıkça onayladı.
+## [2026-09-30] Faz 5: kanıt raporu + Excel düzeltme geri beslemesi
+- Durum: Faz 4 bitti. Faz 5 başlamadı.
+- Sonraki adım: (1) Excel "Kontrol listesi"ndeki "Doğru kategori" sütununu geri okuyup düzeltmeleri eğitim verisine ekleyen ve modeli yeniden eğiten betik (henüz yok; sütun ve açılır liste hazır). (2) Teklifte kullanılacak kanıt raporu: son rakamlar (sentetik olduğu belirtilerek), örnek Excel, ekran görüntüsü. (3) ArdaOS'a rapor.
+- Bağlam: notes.md Faz 5, const.md çalışma noktası. Pencerenin görsel düzeni gerçek ekranda Arda tarafından gözden geçirilmedi (yalnızca otomatik testle açılıp çalıştığı doğrulandı).
